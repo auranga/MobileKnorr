@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<script type="text/javascript" src="jquery-1.5.2.js"></script>
+		<title>Alex</title>
+		<link href="estilo.css" rel="stylesheet" type="text/css">
+	</head>
+	<script language = "javascript">
+		$(document).ready( function() {
+
+			document.getElementById("boton").ontouchstart = function() {
+
+				esFavorito = !esFavorito;
+
+				if(esFavorito) {
+					$("#boton").empty().html('<img src="../imagenes/favorito.png" />');
+					Ti.App.fireEvent('agregarFavoritos', {
+						idi:llave
+					});
+
+				} else {
+					$("#boton").empty().html('<img src="../imagenes/nofavorito.png" />');
+					Ti.App.fireEvent('borrarFavoritos', {
+						idi:llave
+					});
+
+				}
+				Ti.API.info('esFavorito: '+esFavorito);
+			};
+			// do stuff when DOM is ready
+			Ti.API.info('Document Ready ');
+
+		});
+		Ti.App.addEventListener('pageReady', function(e) {
+
+			Ti.API.info('Page Ready ');
+
+			var sound = Titanium.Media.createSound({
+				url:'../audio/SD_KNORR_LOOP_003.wav'
+			});
+			sound.play();
+
+			$("#imagen").empty().html('<img src="'+e.imagen_url+'" />');
+			$("#energia").text(e.energia);
+			$("#proteina").text(e.proteina);
+			$("#lipidos").text(e.lipidos);
+			$("#fibra").text(e.fibra);
+
+			Ti.API.info('imagen_url = ' + e.imagen_url);
+
+			llave=e.llave;
+			esFavorito =e.favorito;
+
+			if(esFavorito) {
+				//poner imagen de favorito
+				$("#boton").empty().html('<img src="../imagenes/favorito.png" />');
+
+			} else {
+				//poner imagen de NO favorito
+				$("#boton").empty().html('<img src="../imagenes/nofavorito.png" />');
+			}
+
+		});
+	</script>
+	<body>
+
+		<div id="imagen">
+		</div>
+		Energia:
+		<div id="energia">
+		</div>
+		Proteina:
+		<div id="proteina">
+		</div>
+		Lipidos:
+		<div id="lipidos">
+		</div>
+		Fibra:
+		<div id="fibra">
+		</div>
+		<div id="boton">
+		</div>
+	</body>
+</html>
