@@ -41,7 +41,6 @@ function setArray() {
 	tableview.setData(dataArray);
 };
 
-
 var tableview = Ti.UI.createTableView({
 	//backgroundImage:'../imagenes/fondo.jpg'
 });
@@ -53,11 +52,11 @@ tableview.addEventListener('click', function(e) {
 		 llave:e.rowData.id,title:e.rowData.title
 		 });
 		 Ti.UI.currentTab.open(ahf);;*/
-	
+
 		var db = Ti.Database.install('../Knorr.sqlite','Knorr');
 		var rows = db.execute('SELECT * FROM ingrediente WHERE id_ingrediente="' + e.rowData.id + '"');
-	Ti.API.info('id abajo:' + rows);
-		
+		Ti.API.info('id abajo:' + rows);
+
 		var agregado = true;
 
 		var ahf = Ti.UI.createWindow({
@@ -67,17 +66,27 @@ tableview.addEventListener('click', function(e) {
 		var webview = Titanium.UI.createWebView({
 			url:'ingredientes_specs.html'
 			//url:'webview-local.html'
+
 		});
 
 		webview.addEventListener('load', function() {
 			Ti.App.fireEvent('pageReady', {
 				llave:e.rowData.id,
+				idFondo:'../imagenes/fondosHTML/'+rows.fieldByName('id_grupo_alimenticio') + '.png',
+				idIconito:'../imagenes/iconitos/'+rows.fieldByName('id_grupo_alimenticio') + '.png',
+				imagen_url:'../imagenes/ingredientes/'+rows.fieldByName('id_ingrediente') + '.png',
+				// ME FALTA ARREGLAR ESTE PEDO!!! nombreGrupo:grupo.fieldByName('nombre'),
+				nombre:rows.fieldByName('nombre'),
 				energia:rows.fieldByName('energia'),
 				proteina:rows.fieldByName('proteina'),
 				lipidos:rows.fieldByName('lipidos'),
-				fibra:rows.fieldByName('fibra') ,
-				//imagen_url:rows.fieldByName('imagen_url'),
-				imagen_url:'../imagenes/ingredientes/'+e.rowData.id+'.png',
+				fibra:rows.fieldByName('fibra'),
+				colesterol:rows.fieldByName('colesterol'),
+				calcio:rows.fieldByName('calcio'),
+				hierro:rows.fieldByName('hierro'),
+				sodio:rows.fieldByName('sodio'),
+				vitamina_a:rows.fieldByName('vitamina_a'),
+				potasio:rows.fieldByName('potasio'),
 				favorito:agregado
 			});
 		});
@@ -101,7 +110,6 @@ tableview.addEventListener('click', function(e) {
 		});
 	}
 });
-
 //tableview.add(the_img);
 currentWin.add(tableview);
 

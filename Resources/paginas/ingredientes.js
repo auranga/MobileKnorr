@@ -68,9 +68,8 @@ tableview.addEventListener('click', function(e) {
 			title:e.rowData.title
 		});
 		var webview = Titanium.UI.createWebView({
-			//url:'ingredientes_specs.html'
+			url:'ingredientes_specs.html'
 			//url:'webview-local.html'
-			url:'favoritas.html'
 		});
 
 		webview.addEventListener('load', function() {
@@ -97,16 +96,21 @@ tableview.addEventListener('click', function(e) {
 		//Ti.App.addEventListener('fromWebview',function(e){  Ti.API.info('from webview: '+e.msg);});
 
 		Ti.App.addEventListener('agregarFavoritos', function(e) {
-			var agregar = db.execute ('INSERT INTO ingredientes_favoritos (id_ingrediente) VALUES ("'+e.idi+'")');
-
-			//Ti.API.info('Datos Insertados llave: '+e.llave)
-			Ti.API.info('Datos Insertados llave idi: '+e.idi)
+			
+			if (!agregado)
+			{
+				agregado = true;
+				var agregar = db.execute ('INSERT INTO ingredientes_favoritos (id_ingrediente) VALUES ("'+e.idi+'")');
+				Ti.API.info('Datos Insertados llave idi: '+e.idi)		
+			}
 		});
 		Ti.App.addEventListener('borrarFavoritos', function(e) {
+			if(agregado)
+			{
+				agregado = false;
 			var borrar = db.execute ('DELETE FROM ingredientes_favoritos WHERE id_ingrediente = "'+e.idi+'"');
-
-			//alert('Datos Borrados');
-			Ti.API.info('Datos borrados llave idi: '+e.idi)
+			Ti.API.info('Datos borrados llave idi: '+e.idi)	
+			}
 		});
 		ahf.add(webview);
 		Titanium.UI.currentTab.open(ahf, {

@@ -1,84 +1,292 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<script type="text/javascript" src="jquery-1.5.2.js"></script>
-		<title>Alex</title>
-		<link href="estilo.css" rel="stylesheet" type="text/css">
-	</head>
-	<script language = "javascript">
-		$(document).ready( function() {
+		<script language= "javascript">
+			$(document).ready( function() {
 
-			document.getElementById("boton").ontouchstart = function() {
+				document.getElementById("boton").ontouchstart = function() {
 
-				esFavorito = !esFavorito;
+					esFavorito = !esFavorito;
+
+					if(esFavorito) {
+						$("#boton").empty().html('<img src="../imagenes/favorito.png" />');
+						Ti.App.fireEvent('agregarFavoritos', {
+							idi:llave
+						});
+
+					} else {
+						$("#boton").empty().html('<img src="../imagenes/nofavorito.png" />');
+						Ti.App.fireEvent('borrarFavoritos', {
+							idi:llave
+						});
+
+					}
+					Ti.API.info('esFavorito: '+esFavorito);
+				};
+				// do stuff when DOM is ready
+				Ti.API.info('Document Ready ');
+
+			});
+			Ti.App.addEventListener('pageReady', function(e) {
+				Ti.API.info('Page Ready ');
+
+				Ti.API.info('idFondo =' + e.idFondo);
+				Ti.API.info('Url foto =' + e.imagen_url);
+
+				$('#apDiv2').css("background-image", "url('"+e.idFondo+"')");
+				$('#apDiv3').css("background-image", "url('"+e.imagen_url+"')");
+				$('#apDiv7').css("background-image", "url('"+e.idIconito+"')");
+				$("#nombreGrupo").text(e.nombreGrupo);
+				$("#nombre").text(e.nombre);
+				$("#energia").text(e.energia);
+				$("#proteina").text(e.proteina);
+				$("#lipidos").text(e.lipidos);
+				$("#fibra").text(e.fibra);
+				$("#colesterol").text(e.colesterol);
+				$("#calcio").text(e.calcio);
+				$("#hierro").text(e.hierro);
+				$("#sodio").text(e.sodio);
+				$("#vitamina_a").text(e.vitamina_a);
+				$("#potasio").text(e.potasio);
+
+				llave=e.llave;
+				esFavorito =e.favorito;
 
 				if(esFavorito) {
+					//poner imagen de favorito
 					$("#boton").empty().html('<img src="../imagenes/favorito.png" />');
-					Ti.App.fireEvent('agregarFavoritos', {
-						idi:llave
-					});
 
 				} else {
+					//poner imagen de NO favorito
 					$("#boton").empty().html('<img src="../imagenes/nofavorito.png" />');
-					Ti.App.fireEvent('borrarFavoritos', {
-						idi:llave
-					});
-
 				}
-				Ti.API.info('esFavorito: '+esFavorito);
-			};
-			// do stuff when DOM is ready
-			Ti.API.info('Document Ready ');
 
-		});
-		Ti.App.addEventListener('pageReady', function(e) {
-
-			Ti.API.info('Page Ready ');
-
-			var sound = Titanium.Media.createSound({
-				url:'../audio/SD_KNORR_LOOP_003.wav'
 			});
-			sound.play();
-
-			$("#imagen").empty().html('<img src="'+e.imagen_url+'" />');
-			$("#energia").text(e.energia);
-			$("#proteina").text(e.proteina);
-			$("#lipidos").text(e.lipidos);
-			$("#fibra").text(e.fibra);
-
-			Ti.API.info('imagen_url = ' + e.imagen_url);
-
-			llave=e.llave;
-			esFavorito =e.favorito;
-
-			if(esFavorito) {
-				//poner imagen de favorito
-				$("#boton").empty().html('<img src="../imagenes/favorito.png" />');
-
-			} else {
-				//poner imagen de NO favorito
-				$("#boton").empty().html('<img src="../imagenes/nofavorito.png" />');
+		</script>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>ingrediente</title>
+		<style type="text/css">
+			#apDiv2 {
+				position:absolute;
+				left:0px;
+				top:0px;
+				width:320px;
+				height:860px;
+				z-index:1;
+				/*background-image:url(../imagenes/fondosHTML/4.png);*/
 			}
-
-		});
-	</script>
+			#apDiv3 {
+				position:absolute;
+				left:94px;
+				top:65px;
+				width:140px;
+				height:195px;
+				z-index:2;
+				text-align: center;
+				background-repeat:no-repeat;
+			}
+			#apDiv4 {
+				position:absolute;
+				left:2px;
+				top:540px;
+				width:318px;
+				height:184px;
+				z-index:3;
+			}
+			#apDiv5 {
+				position:absolute;
+				left:0px;
+				top:273px;
+				width:320px;
+				height:171px;
+				z-index:4;
+			}
+			#apDiv6 {
+				position:absolute;
+				left:419px;
+				top:82px;
+				width:482px;
+				height:56px;
+				z-index:5;
+			}
+			.ingrediente {
+				font-weight: bold;
+				font-size: 33px;
+				color: #FFF;
+				font-family: Meloriac;
+				font-style: normal;
+			}
+			.texto {
+				font-family: "Myriad Pro";
+				font-size: 16px;
+				color: #666;
+			}
+			.datos {
+				font-family: "Myriad Pro";
+				font-size: 15px;
+				color: #FFF;
+				text-align: center;
+			}
+			.grupoAlimenticio {
+				color: #FFF;
+				font-family: "Myriad Pro";
+				font-style: normal;
+				font-style: italic;
+				font-size: 25px;
+				color: #000;
+				text-align:left;
+			}
+			.informacionbasica {
+				color: #000;
+				font-size: 19px;
+				font-weight: bold;
+			}
+			#apDiv7 {
+				position:absolute;
+				left:2px;
+				top:10px;
+				width:67px;
+				height:46px;
+				z-index:6;
+				background-repeat:no-repeat;
+			}
+			#apDiv8 {
+				position:absolute;
+				left:0px;
+				top:68px;
+				width:320px;
+				height:53px;
+				z-index:7;
+				text-align:center;
+			}
+			#apDiv9 {
+				position:absolute;
+				left:58px;
+				top:22px;
+				width:263px;
+				height:34px;
+				z-index:8;
+			}
+		</style>
+	</head>
 	<body>
-
-		<div id="imagen">
+		<div id="apDiv2" >
 		</div>
-		Energia:
-		<div id="energia">
+		<div id="apDiv3">
+			<p>
+				<!-- 	<img src="../imagenes/ingredientes/555.png" width="140" height="195" alt="jgfh" /> -->
+			</p>
 		</div>
-		Proteina:
-		<div id="proteina">
+		<div id="apDiv4">
+			<p class="informacionbasica">
+				<span class="informacionbasica">informacion basica</span>
+			</p>
+			<p class="texto">
+				Una noticia es el relato o redacción de un texto informativo en que se quiere dar a conocer con sus propias reglas de construcción
+			</p>
+			<p class="texto">
+				Que se refiere a un hecho novedoso o atípico o la relación entre hechos novedosos enes y/o atípicos-, ocurrido dentro de una comunidad o determinado ámbito específico, que hace que merezca su divulgación.
+			</p>
 		</div>
-		Lipidos:
-		<div id="lipidos">
+		<div id="apDiv5">
+			<table width="255" height="135" border="0" align="center" id="#tabla">
+				<tr class="datos">
+					<td scope="col">
+					<strong>
+					<span class="datos">Porcion</span>
+					</strong>
+					</td>
+					<td scope="col">
+					<strong>
+					<span class="datos">1pieza(5g)</span>
+					</strong>
+					</td>
+				</tr>
+				<tr class="datos">
+					<td width="126" bgcolor="#bdb39a"  scope="col">Energia</td>
+					<td width="119" bgcolor="#bdb39a" scope="col">
+					<div id="energia">
+					</div>
+					</td>
+				</tr>
+				<tr class="datos">
+					<td>Proteina</td>
+					<td>
+					<div id="proteina">
+					</div>
+					</td>
+				</tr>
+				<tr class="datos">
+					<td bgcolor="#bdb39a">Lipidos</td>
+					<td bgcolor="#bdb39a">
+					<div id="lipidos">
+					</div>
+					</td>
+				</tr>
+				<tr class="datos">
+					<td>Fibra</td>
+					<td>
+					<div id="fibra">
+					</div>
+					</td>
+				</tr>
+				<tr class="datos">
+					<td bgcolor="#BDB39A">Colesterol</td>
+					<td bgcolor="#BDB39A">
+					<div id="colesterol">
+					</div>
+					</td>
+				</tr>
+				<tr class="datos">
+					<td>Calcio</td>
+					<td>
+					<div id="calcio">
+					</div>
+					</td>
+				</tr>
+				<tr class="datos">
+					<td bgcolor="#BDB39A">Hierro</td>
+					<td bgcolor="#BDB39A">
+					<div id="hierro">
+					</div>
+					</td>
+				</tr>
+				<tr class="datos">
+					<td>Sodio</td>
+					<td>
+					<div id="sodio">
+					</div>
+					</td>
+				</tr>
+				<tr class="datos">
+					<td bgcolor="#BDB39A">Vitamina A</td>
+					<td bgcolor="#BDB39A">
+					<div id="vitamina_a">
+					</div>
+					</td>
+				</tr>
+				<tr class="datos">
+					<td>Potasio</td>
+					<td>
+					<div id="potasio">
+					</div>
+					</td>
+				</tr>
+			</table>
 		</div>
-		Fibra:
-		<div id="fibra">
+		<div id="apDiv7">
+			<!--  <img src="../imagenes/iconitos/4.png" width="43" height="43" alt="ccs" />  -->
 		</div>
-		<div id="boton">
+		<div class="ingrediente" id="apDiv8">
+			<div id="boton">
+			</div>
+			<div id="nombre">
+			</div>
+		</div>
+		<div class="grupoAlimenticio" id="apDiv9">
+			<div id="nombreGrupo">
+			</div>
 		</div>
 	</body>
 </html>
