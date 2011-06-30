@@ -11,6 +11,8 @@ var db = Ti.Database.install('../Knorr.sqlite','Knorr');
 
 var llave = Ti.UI.currentWindow.llave;
 
+var title = Ti.UI.currentWindow.title;
+
 var rows = db.execute('SELECT * FROM ingrediente WHERE id_grupo_alimenticio="' + llave + '"');
 
 function setArray() {
@@ -49,9 +51,10 @@ tableview.addEventListener('click', function(e) {
 		 });
 		 Ti.UI.currentTab.open(ahf);;*/
 		var db = Ti.Database.install('../Knorr.sqlite','Knorr');
-		var rows = db.execute('SELECT * FROM ingrediente WHERE id_ingrediente="' + e.rowData.id + '"');
-
-		var favorito = db.execute ('SELECT * FROM ingredientes_favoritos WHERE id_ingrediente="' + e.rowData.id + '"');
+		var rows = db.execute('SELECT * FROM ingrediente WHERE id_ingrediente = "' + e.rowData.id + '"');
+		var grupo = db.execute('SELECT nombre FROM grupo_alimenticio WHERE nombre = "' + title + '"');
+		var favorito = db.execute ('SELECT * FROM ingredientes_favoritos WHERE id_ingrediente = "' + e.rowData.id + '"');
+		
 		var agregado= false;
 		if(favorito.rowCount > 0) {
 			agregado = true;
@@ -73,13 +76,21 @@ tableview.addEventListener('click', function(e) {
 		webview.addEventListener('load', function() {
 			Ti.App.fireEvent('pageReady', {
 				llave:e.rowData.id,
-				energia:rows.fieldByName('energia'),
-				proteina:rows.fieldByName('proteina'),
-				lipidos:rows.fieldByName('lipidos'),
-				fibra:rows.fieldByName('fibra') ,
 				idFondo:'../imagenes/fondosHTML/'+rows.fieldByName('id_grupo_alimenticio') + '.png',
 				idIconito:'../imagenes/iconitos/'+rows.fieldByName('id_grupo_alimenticio') + '.png',
 				imagen_url:'../imagenes/ingredientes/'+rows.fieldByName('id_ingrediente') + '.png',
+				nombreGrupo:grupo.fieldByName('nombre'),			
+				nombre:rows.fieldByName('nombre'),
+				energia:rows.fieldByName('energia'),
+				proteina:rows.fieldByName('proteina'),
+				lipidos:rows.fieldByName('lipidos'),
+				fibra:rows.fieldByName('fibra'),
+				colesterol:rows.fieldByName('colesterol'),
+				calcio:rows.fieldByName('calcio'),
+				hierro:rows.fieldByName('hierro'),
+				sodio:rows.fieldByName('sodio'),
+				vitamina_a:rows.fieldByName('vitamina_a'),
+				potasio:rows.fieldByName('potasio'),
 				favorito:agregado
 			});
 		});
@@ -87,13 +98,13 @@ tableview.addEventListener('click', function(e) {
 
 		Ti.App.addEventListener('agregarFavoritos', function(e) {
 			var agregar = db.execute ('INSERT INTO ingredientes_favoritos (id_ingrediente) VALUES ("'+e.idi+'")');
-			
+
 			//Ti.API.info('Datos Insertados llave: '+e.llave)
 			Ti.API.info('Datos Insertados llave idi: '+e.idi)
 		});
 		Ti.App.addEventListener('borrarFavoritos', function(e) {
 			var borrar = db.execute ('DELETE FROM ingredientes_favoritos WHERE id_ingrediente = "'+e.idi+'"');
-			
+
 			//alert('Datos Borrados');
 			Ti.API.info('Datos borrados llave idi: '+e.idi)
 		});

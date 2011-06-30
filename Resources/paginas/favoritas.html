@@ -5,25 +5,31 @@
 		<script language= "javascript">
 			$(document).ready( function() {
 
-			// do stuff when DOM is ready
-			Ti.API.info('Document Ready ');
+				// do stuff when DOM is ready
+				Ti.API.info('Document Ready ');
 
 			});
 			Ti.App.addEventListener('pageReady', function(e) {
-			Ti.API.info('Page Ready ');
+				Ti.API.info('Page Ready ');
 
-			var sound = Titanium.Media.createSound({
-			url:'../audio/SD_KNORR_LOOP_003.wav'
-			});
-			sound.play();
+				Ti.API.info('idFondo =' + e.idFondo);
+				Ti.API.info('Url foto =' + e.imagen_url);
 
-			Ti.API.info('idFondo =' + e.idFondo);
-
-			//$('#apDiv2').css("background-image", "url('"+e.idFondo+"')");
-			$('#div1').css("background-image", "url(../imagenes/fondosHTML/4.png)");
-			$('#apDiv3').css("background-image", "url('"+e.imagen_url+"')");
-			$('#apDiv7').css("background-image", "url('"+e.idIconito+"')");
-			//$("#imagen").empty().html('<img src="'+e.imagen_url+'" />');
+				$('#apDiv2').css("background-image", "url('"+e.idFondo+"')");
+				$('#apDiv3').css("background-image", "url('"+e.imagen_url+"')");
+				$('#apDiv7').css("background-image", "url('"+e.idIconito+"')");
+				$("#nombreGrupo").text(e.nombreGrupo);
+				$("#nombre").text(e.nombre);
+				$("#energia").text(e.energia);
+				$("#proteina").text(e.proteina);
+				$("#lipidos").text(e.lipidos);
+				$("#fibra").text(e.fibra);
+				$("#colesterol").text(e.colesterol);
+				$("#calcio").text(e.calcio);
+				$("#hierro").text(e.hierro);
+				$("#sodio").text(e.sodio);
+				$("#vitamina_a").text(e.vitamina_a);
+				$("#potasio").text(e.potasio);
 			});
 		</script>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -39,13 +45,14 @@
 				/*background-image:url(../imagenes/fondosHTML/4.png);*/
 			}
 			#apDiv3 {
-				position:absolute;
-				left:100px;
-				top:47px;
-				width:140px;
-				height:195px;
-				z-index:2;
-				text-align: center;
+	position:absolute;
+	left:94px;
+	top:65px;
+	width:140px;
+	height:195px;
+	z-index:2;
+	text-align: center;
+	background-repeat:no-repeat;
 			}
 			#apDiv4 {
 				position:absolute;
@@ -81,23 +88,22 @@
 			.texto {
 				font-family: "Myriad Pro";
 				font-size: 16px;
-				color: #604B17;
+				color: #666;
 			}
 			.datos {
 				font-family: "Myriad Pro";
 				font-size: 15px;
-				color: #463301;
+				color: #FFF;
 				text-align: center;
 			}
 			.grupoAlimenticio {
-				font-size: 50px;
 				color: #FFF;
 				font-family: "Myriad Pro";
 				font-style: normal;
 				font-style: italic;
-				font-size: 29px;
-				color: #6C561C;
-				text-align:center;
+				font-size: 25px;
+				color: #000;
+				text-align:left;
 			}
 			.informacionbasica {
 				color: #000;
@@ -105,43 +111,44 @@
 				font-weight: bold;
 			}
 			#apDiv7 {
-				position:absolute;
-				left:33px;
-				top:10px;
-				width:40px;
-				height:40px;
-				z-index:6;
+	position:absolute;
+	left:2px;
+	top:10px;
+	width:67px;
+	height:46px;
+	z-index:6;
+	background-repeat:no-repeat;
 			}
 			#apDiv8 {
-				position:absolute;
-				left:0px;
-				top:66px;
-				width:320px;
-				height:53px;
-				z-index:7;
-				text-align:center;
+	position:absolute;
+	left:0px;
+	top:68px;
+	width:320px;
+	height:53px;
+	z-index:7;
+	text-align:center;
 			}
 			#apDiv9 {
-				position:absolute;
-				left:57px;
-				top:18px;
-				width:260px;
-				height:34px;
-				z-index:8;
-			}
+	position:absolute;
+	left:58px;
+	top:22px;
+	width:263px;
+	height:34px;
+	z-index:8;
+			}
+
 		</style>
 	</head>
 	<body>
-		<div id="div1" class="apDiv2">
+		<div id="apDiv2" >
 		</div>
 		<div id="apDiv3">
 			<p>
 				<!-- 	<img src="../imagenes/ingredientes/555.png" width="140" height="195" alt="jgfh" /> -->
 			</p>
 		</div>
-		
 		<div id="apDiv4">
-			<p class="informacionbasica">
+<p class="informacionbasica">
 				<span class="informacionbasica">informacion basica</span>
 			</p>
 			<p class="texto">
@@ -167,43 +174,73 @@
 				</tr>
 				<tr class="datos">
 					<td width="126" bgcolor="#bdb39a"  scope="col">Energia</td>
-					<td width="119" bgcolor="#bdb39a" scope="col">25</td>
+					<td width="119" bgcolor="#bdb39a" scope="col">
+					<div id="energia">
+					</div>
+					</td>
 				</tr>
 				<tr class="datos">
 					<td>Proteina</td>
-					<td>1.4</td>
+					<td>
+					<div id="proteina">
+					</div>
+					</td>
 				</tr>
 				<tr class="datos">
 					<td bgcolor="#bdb39a">Lipidos</td>
-					<td bgcolor="#bdb39a">0.2</td>
+					<td bgcolor="#bdb39a">
+					<div id="lipidos">
+					</div>
+					</td>
 				</tr>
 				<tr class="datos">
 					<td>Fibra</td>
-					<td>4.1</td>
+					<td>
+					<div id="fibra">
+					</div>
+					</td>
 				</tr>
 				<tr class="datos">
 					<td bgcolor="#BDB39A">Colesterol</td>
-					<td bgcolor="#BDB39A">0%</td>
+					<td bgcolor="#BDB39A">
+					<div id="colesterol">
+					</div>
+					</td>
 				</tr>
 				<tr class="datos">
 					<td>Calcio</td>
-					<td>0%</td>
+					<td>
+					<div id="calcio">
+					</div>
+					</td>
 				</tr>
 				<tr class="datos">
 					<td bgcolor="#BDB39A">Hierro</td>
-					<td bgcolor="#BDB39A">0%</td>
+					<td bgcolor="#BDB39A">
+					<div id="hierro">
+					</div>
+					</td>
 				</tr>
 				<tr class="datos">
 					<td>Sodio</td>
-					<td>0%</td>
+					<td>
+					<div id="sodio">
+					</div>
+					</td>
 				</tr>
 				<tr class="datos">
 					<td bgcolor="#BDB39A">Vitamina A</td>
-					<td bgcolor="#BDB39A">0%</td>
+					<td bgcolor="#BDB39A">
+					<div id="vitamina_a">
+					</div>
+					</td>
 				</tr>
 				<tr class="datos">
 					<td>Potasio</td>
-					<td>748.9</td>
+					<td>
+					<div id="potasio">
+					</div>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -211,10 +248,12 @@
 			<!--  <img src="../imagenes/iconitos/4.png" width="43" height="43" alt="ccs" />  -->
 		</div>
 		<div class="ingrediente" id="apDiv8">
-			PIMIENTA NEGRA
+			<div id="nombre">
+			</div>
 		</div>
 		<div class="grupoAlimenticio" id="apDiv9">
-			Panes y harinas
+			<div id="nombreGrupo">
+			</div>
 		</div>
 	</body>
 </html>
