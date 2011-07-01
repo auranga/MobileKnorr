@@ -54,6 +54,7 @@ tableview.addEventListener('click', function(e) {
 		 Ti.UI.currentTab.open(ahf);;*/
 
 		var db = Ti.Database.install('../Knorr.sqlite','Knorr');
+		//var grupo = db.execute('SELECT nombre FROM grupo_alimenticio WHERE nombre = "' + title + '"');
 		var rows = db.execute('SELECT * FROM ingrediente WHERE id_ingrediente="' + e.rowData.id + '"');
 		Ti.API.info('id abajo:' + rows);
 

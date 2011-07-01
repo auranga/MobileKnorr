@@ -27,7 +27,16 @@ function setArray() {
 			title:'' + rows.fieldByName('nombre') + '',
 			id:''+rows.fieldByName('id_ingrediente')+ '',
 			hasChild:true,
-			path:'ingredientes_specs.js'
+			path:'ingredientes_specs.js',
+			color:'black',
+			backgroundColor:'white',
+			//selectedColor:'blue',
+			font: {
+		fontSize:18,
+		fontFamily:'Meloriac'
+	}
+			//selectedBackgroundColor:'14cfd6',//azulio
+			//backgroundColor:'ffffff'//blanco
 		});
 		rows.next();
 	};
@@ -40,7 +49,7 @@ function setArray() {
 var tableview = Ti.UI.createTableView({
 	//backgroundImage:'../imagenes/f1.png'
 
-	backgroundImage:'../imagenes/f'+rows.fieldByName('id_grupo_alimenticio') +'.png',
+	//backgroundImage:'../imagenes/f'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 });
 
 tableview.addEventListener('click', function(e) {
@@ -54,7 +63,7 @@ tableview.addEventListener('click', function(e) {
 		var rows = db.execute('SELECT * FROM ingrediente WHERE id_ingrediente = "' + e.rowData.id + '"');
 		var grupo = db.execute('SELECT nombre FROM grupo_alimenticio WHERE nombre = "' + title + '"');
 		var favorito = db.execute ('SELECT * FROM ingredientes_favoritos WHERE id_ingrediente = "' + e.rowData.id + '"');
-		
+
 		var agregado= false;
 		if(favorito.rowCount > 0) {
 			agregado = true;
@@ -78,7 +87,7 @@ tableview.addEventListener('click', function(e) {
 				idFondo:'../imagenes/fondosHTML/'+rows.fieldByName('id_grupo_alimenticio') + '.png',
 				idIconito:'../imagenes/iconitos/'+rows.fieldByName('id_grupo_alimenticio') + '.png',
 				imagen_url:'../imagenes/ingredientes/'+rows.fieldByName('id_ingrediente') + '.png',
-				nombreGrupo:grupo.fieldByName('nombre'),			
+				nombreGrupo:grupo.fieldByName('nombre'),
 				nombre:rows.fieldByName('nombre'),
 				energia:rows.fieldByName('energia'),
 				proteina:rows.fieldByName('proteina'),
@@ -96,20 +105,18 @@ tableview.addEventListener('click', function(e) {
 		//Ti.App.addEventListener('fromWebview',function(e){  Ti.API.info('from webview: '+e.msg);});
 
 		Ti.App.addEventListener('agregarFavoritos', function(e) {
-			
-			if (!agregado)
-			{
+
+			if (!agregado) {
 				agregado = true;
 				var agregar = db.execute ('INSERT INTO ingredientes_favoritos (id_ingrediente) VALUES ("'+e.idi+'")');
-				Ti.API.info('Datos Insertados llave idi: '+e.idi)		
+				Ti.API.info('Datos Insertados llave idi: '+e.idi)
 			}
 		});
 		Ti.App.addEventListener('borrarFavoritos', function(e) {
-			if(agregado)
-			{
+			if(agregado) {
 				agregado = false;
-			var borrar = db.execute ('DELETE FROM ingredientes_favoritos WHERE id_ingrediente = "'+e.idi+'"');
-			Ti.API.info('Datos borrados llave idi: '+e.idi)	
+				var borrar = db.execute ('DELETE FROM ingredientes_favoritos WHERE id_ingrediente = "'+e.idi+'"');
+				Ti.API.info('Datos borrados llave idi: '+e.idi)
 			}
 		});
 		ahf.add(webview);
