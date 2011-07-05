@@ -18,17 +18,6 @@ var tab1 = Titanium.UI.createTab({
 	window:win1
 });
 
-var label1 = Titanium.UI.createLabel({
-	color:'#999',
-	text:'Aplicacion KNORR',
-	font: {
-		fontSize:20,
-		fontFamily:'Helvetica Neue'
-	},
-	textAlign:'center',
-	width:'auto'
-});
-
 var win2 = Titanium.UI.createWindow({
 	title:'Favoritos',
 	url:'paginas/favoritos.js',
@@ -43,19 +32,6 @@ var tab2 = Titanium.UI.createTab({
 	window:win2
 });
 
-var label2 = Titanium.UI.createLabel({
-	color:'#999',
-	text:'Favoritos',
-	font: {
-		fontSize:20,
-		fontFamily:'Helvetica Neue'
-	},
-	textAlign:'center',
-	width:'auto'
-});
-
-//win1.add(label1);
-//win2.add(label2);
 tabGroup.addTab(tab1);
 tabGroup.addTab(tab2);
 

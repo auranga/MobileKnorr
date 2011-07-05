@@ -42,13 +42,7 @@ var tableview = Ti.UI.createTableView({
 
 tableview.addEventListener('click', function(e) {
 	if (e.rowData.path) {
-		/*/var win = Ti.UI.createWindow({
-		 url:e.rowData.path,
-		 title:e.rowData.title
-		 });
-
-		 /*/
-
+		
 		var ahf = Ti.UI.createWindow({
 			fullscreen:false,
 			url:e.rowData.path,
@@ -58,12 +52,6 @@ tableview.addEventListener('click', function(e) {
 
 		Ti.UI.currentTab.open(ahf);
 
-		/*/ var llave = e.rowData.id;
-		 ahf.llave = llave;
-
-		 var prodCat = e.rowData.title;
-		 win.prodCat = prodCat;
-		 Ti.UI.currentTab.open(win);/*/
 	}
 });
 // add the tableView to the current window

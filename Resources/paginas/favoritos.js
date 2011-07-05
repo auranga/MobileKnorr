@@ -1,11 +1,5 @@
 var currentWin = Ti.UI.currentWindow;
 
-var the_img = Titanium.UI.createImageView({
-	image:'../imagenes/favorito_header.png',
-	top:10,
-	left:'center'
-})
-
 var sound = Titanium.Media.createSound({
 	url:'../audio/SD_KNORR_LOOP_001.wav'
 });
@@ -17,9 +11,7 @@ var db = Ti.Database.install('../Knorr.sqlite','Knorr');
 
 var llave = Ti.UI.currentWindow.llave;
 
-var rows = db.execute('SELECT ingrediente.nombre, ingrediente.id_ingrediente FROM ingrediente INNER JOIN ingredientes_favoritos ON  ingrediente.id_ingrediente = ingredientes_favoritos.id_ingrediente');
-
-//var rows = db.execute('SELECT * FROM ingredientes_favoritos');
+var rows = db.execute('SELECT DISTINCT ingrediente.nombre, ingrediente.id_ingrediente,ingrediente.id_grupo_alimenticio FROM ingrediente INNER JOIN ingredientes_favoritos ON  ingrediente.id_ingrediente = ingredientes_favoritos.id_ingrediente');
 
 function setArray() {
 
@@ -31,8 +23,16 @@ function setArray() {
 			//title:'' + rows.fieldByName('id_ingrediente_favorito') + '',
 			title:'' + rows.fieldByName('nombre') + '',
 			id:''+rows.fieldByName('id_ingrediente')+ '',
+			idGrupo:''+rows.fieldByName('id_grupo_alimenticio')+ '',
 			hasChild:true,
-			path:'ingredientes_specs.js'
+			path:'ingredientes_specs.js',
+			color:'black',
+			backgroundColor:'#d4d57b',
+			backgroundSelectedColor:'orange',
+			font: {
+				fontSize:18,
+				fontFamily:'Meloriac'
+			}
 		});
 		rows.next();
 	};
@@ -47,16 +47,14 @@ var tableview = Ti.UI.createTableView({
 
 tableview.addEventListener('click', function(e) {
 	if (e.rowData.path) {
-		/*var ahf = Ti.UI.createWindow({
-		 url:e.rowData.path,
-		 llave:e.rowData.id,title:e.rowData.title
-		 });
-		 Ti.UI.currentTab.open(ahf);;*/
 
 		var db = Ti.Database.install('../Knorr.sqlite','Knorr');
-		//var grupo = db.execute('SELECT nombre FROM grupo_alimenticio WHERE nombre = "' + title + '"');
+
+		var grupo = db.execute('SELECT grupo_alimenticio.nombre, grupo_alimenticio.informacion FROM ingredientes_favoritos INNER JOIN ingrediente ON ingredientes_favoritos.id_ingrediente = ingrediente.id_ingrediente INNER JOIN grupo_alimenticio ON grupo_alimenticio.id_grupo_alimenticio = ingrediente.id_grupo_alimenticio WHERE ingrediente.id_grupo_alimenticio =  "' + e.rowData.idGrupo + '"' );
+
+		Ti.API.info('Id grupo Momia: '+e.rowData.idGrupo);
+
 		var rows = db.execute('SELECT * FROM ingrediente WHERE id_ingrediente="' + e.rowData.id + '"');
-		Ti.API.info('id abajo:' + rows);
 
 		var agregado = true;
 
@@ -66,8 +64,6 @@ tableview.addEventListener('click', function(e) {
 		});
 		var webview = Titanium.UI.createWebView({
 			url:'ingredientes_specs.html'
-			//url:'webview-local.html'
-
 		});
 
 		webview.addEventListener('load', function() {
@@ -76,7 +72,8 @@ tableview.addEventListener('click', function(e) {
 				idFondo:'../imagenes/fondosHTML/'+rows.fieldByName('id_grupo_alimenticio') + '.png',
 				idIconito:'../imagenes/iconitos/'+rows.fieldByName('id_grupo_alimenticio') + '.png',
 				imagen_url:'../imagenes/ingredientes/'+rows.fieldByName('id_ingrediente') + '.png',
-				// ME FALTA ARREGLAR ESTE PEDO!!! nombreGrupo:grupo.fieldByName('nombre'),
+				nombreGrupo:grupo.fieldByName('nombre'),
+				informacion:grupo.fieldByName('informacion'),
 				nombre:rows.fieldByName('nombre'),
 				energia:rows.fieldByName('energia'),
 				proteina:rows.fieldByName('proteina'),

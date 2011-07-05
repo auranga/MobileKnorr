@@ -38,6 +38,7 @@
 				$('#apDiv3').css("background-image", "url('"+e.imagen_url+"')");
 				$('#apDiv7').css("background-image", "url('"+e.idIconito+"')");
 				$("#nombreGrupo").text(e.nombreGrupo);
+				$("#informacion").text(e.informacion);
 				$("#nombre").text(e.nombre);
 				$("#energia").text(e.energia);
 				$("#proteina").text(e.proteina);
@@ -68,13 +69,12 @@
 		<title>ingrediente</title>
 		<style type="text/css">
 			#apDiv2 {
-				position:absolute;
-				left:0px;
-				top:0px;
-				width:320px;
-				height:860px;
-				z-index:1;
-				/*background-image:url(../imagenes/fondosHTML/4.png);*/
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:320px;
+	height:738px;
+	z-index:1;				/*background-image:url(../imagenes/fondosHTML/4.png);*/
 			}
 			#apDiv3 {
 				position:absolute;
@@ -114,16 +114,16 @@
 				font-weight: bold;
 				font-size: 33px;
 				color: #FFF;
-				font-family: 'Meloriac';
+				font-family: "MS Serif", "New York", serif;
 				text-align: center;
+				text-transform:uppercase;
 			}
 			.texto {
-				font-family: "Myriad Pro";
+				font-family: "Droid Serif";
 				font-size: 16px;
 				color: #666;
 			}
 			.datos {
-				font-family: "Myriad Pro";
 				font-size: 15px;
 				color: #FFF;
 				text-align: center;
@@ -132,7 +132,7 @@
 				color: #FFF;
 				font-family: "Myriad Pro";
 				font-style: italic;
-				font-size: 25px;
+				font-size: 24px;
 				color: #000;
 				text-align:left;
 			}
@@ -144,16 +144,17 @@
 			#apDiv7 {
 				position:absolute;
 				left:2px;
-				top:10px;
+				top:8px;
 				width:67px;
-				height:46px;
+				height:50px;
 				z-index:6;
+				background-position: center center;
 				background-repeat:no-repeat;
 			}
 			#apDiv8 {
 				position:absolute;
 				left:0px;
-				top:68px;
+				top:66px;
 				width:320px;
 				height:53px;
 				z-index:7;
@@ -161,19 +162,20 @@
 			}
 			#apDiv9 {
 				position:absolute;
-				left:58px;
+				left:56px;
 				top:22px;
-				width:263px;
+				width:264px;
 				height:34px;
 				z-index:8;
-			}
+			}
+
 		</style>
 	</head>
 	<body>
 		<div id="apDiv2" >
 		</div>
 		<div id="apDiv3">
-			<p>
+		  <p>
 				<!-- 	<img src="../imagenes/ingredientes/555.png" width="140" height="195" alt="jgfh" /> -->
 			</p>
 		</div>
@@ -181,12 +183,8 @@
 			<p class="informacionbasica">
 				<span class="informacionbasica">informacion basica</span>
 			</p>
-			<p class="texto">
-				Una noticia es el relato o redacción de un texto informativo en que se quiere dar a conocer con sus propias reglas de construcción
-			</p>
-			<p class="texto">
-				Que se refiere a un hecho novedoso o atípico o la relación entre hechos novedosos enes y/o atípicos-, ocurrido dentro de una comunidad o determinado ámbito específico, que hace que merezca su divulgación.
-			</p>
+			<div id="informacion" class="texto">
+			</div>
 		</div>
 		<div id="apDiv5">
 			<table width="255" height="135" border="0" align="center" id="#tabla">

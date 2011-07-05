@@ -14,12 +14,17 @@ var llave = Ti.UI.currentWindow.llave;
 var title = Ti.UI.currentWindow.title;
 
 var rows = db.execute('SELECT * FROM ingrediente WHERE id_grupo_alimenticio="' + llave + '"');
+//var idfondo:rows.fieldByName('id_grupo_alimenticio'),
+var coloresArray = [];
+	coloresArray.push ("red","#a9cd99","#d4d57b","#e1a47c","#e0bd7f","#94cdbc","#e97575","#a6bef3","#80bec9","#e0be7f",
+	"#dc9bca","#d4d57a","#a9cd99","#e97575","#e1a47c","#a9cd99");
 
 function setArray() {
 
-	Ti.API.info('rows:' + rows);
+	Ti.API.info('rows:' + rows.rowCount);
 
 	// create the array
+
 	var dataArray = [];
 
 	while (rows.isValidRow()) {
@@ -29,14 +34,12 @@ function setArray() {
 			hasChild:true,
 			path:'ingredientes_specs.js',
 			color:'black',
-			backgroundColor:'white',
-			//selectedColor:'blue',
+			backgroundColor:coloresArray[rows.fieldByName('id_grupo_alimenticio')],
+			backgroundSelectedColor:'orange',
 			font: {
-		fontSize:18,
-		fontFamily:'Meloriac'
-	}
-			//selectedBackgroundColor:'14cfd6',//azulio
-			//backgroundColor:'ffffff'//blanco
+				fontSize:18,
+				fontFamily:'Meloriac'
+			}
 		});
 		rows.next();
 	};
@@ -46,22 +49,16 @@ function setArray() {
 };
 
 // create table view
-var tableview = Ti.UI.createTableView({
-	//backgroundImage:'../imagenes/f1.png'
 
-	//backgroundImage:'../imagenes/f'+rows.fieldByName('id_grupo_alimenticio') +'.png',
+var tableview = Ti.UI.createTableView({
+//backgroundImage:'../imagenes/f'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 });
 
 tableview.addEventListener('click', function(e) {
 	if (e.rowData.path) {
-		/*var ahf = Ti.UI.createWindow({
-		 url:e.rowData.path,
-		 llave:e.rowData.id,title:e.rowData.title
-		 });
-		 Ti.UI.currentTab.open(ahf);;*/
 		var db = Ti.Database.install('../Knorr.sqlite','Knorr');
 		var rows = db.execute('SELECT * FROM ingrediente WHERE id_ingrediente = "' + e.rowData.id + '"');
-		var grupo = db.execute('SELECT nombre FROM grupo_alimenticio WHERE nombre = "' + title + '"');
+		var grupo = db.execute('SELECT * FROM grupo_alimenticio WHERE nombre = "' + title + '"');
 		var favorito = db.execute ('SELECT * FROM ingredientes_favoritos WHERE id_ingrediente = "' + e.rowData.id + '"');
 
 		var agregado= false;
@@ -88,6 +85,7 @@ tableview.addEventListener('click', function(e) {
 				idIconito:'../imagenes/iconitos/'+rows.fieldByName('id_grupo_alimenticio') + '.png',
 				imagen_url:'../imagenes/ingredientes/'+rows.fieldByName('id_ingrediente') + '.png',
 				nombreGrupo:grupo.fieldByName('nombre'),
+				informacion:grupo.fieldByName('informacion'),
 				nombre:rows.fieldByName('nombre'),
 				energia:rows.fieldByName('energia'),
 				proteina:rows.fieldByName('proteina'),
@@ -102,8 +100,6 @@ tableview.addEventListener('click', function(e) {
 				favorito:agregado
 			});
 		});
-		//Ti.App.addEventListener('fromWebview',function(e){  Ti.API.info('from webview: '+e.msg);});
-
 		Ti.App.addEventListener('agregarFavoritos', function(e) {
 
 			if (!agregado) {
