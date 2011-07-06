@@ -20,19 +20,21 @@ function setArray() {
 
 	while (rows.isValidRow()) {
 		dataArray.push({
-			//title:'' + rows.fieldByName('id_ingrediente_favorito') + '',
 			title:'' + rows.fieldByName('nombre') + '',
 			id:''+rows.fieldByName('id_ingrediente')+ '',
 			idGrupo:''+rows.fieldByName('id_grupo_alimenticio')+ '',
 			hasChild:true,
 			path:'ingredientes_specs.js',
-			color:'black',
-			backgroundColor:'#d4d57b',
+			color:'#1c191b',
+			left:'50',
+			backgroundImage:'../imagenes/botonsios_ingredientes/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 			backgroundSelectedColor:'orange',
 			font: {
-				fontSize:18,
-				fontFamily:'Meloriac'
-			}
+				fontFamily:'myriadpro-semibold',
+				fontSize: '20px'
+			},
+			height: 'auto',
+			width: 'auto'
 		});
 		rows.next();
 	};

@@ -15,9 +15,6 @@ var title = Ti.UI.currentWindow.title;
 
 var rows = db.execute('SELECT * FROM ingrediente WHERE id_grupo_alimenticio="' + llave + '"');
 //var idfondo:rows.fieldByName('id_grupo_alimenticio'),
-var coloresArray = [];
-	coloresArray.push ("red","#a9cd99","#d4d57b","#e1a47c","#e0bd7f","#94cdbc","#e97575","#a6bef3","#80bec9","#e0be7f",
-	"#dc9bca","#d4d57a","#a9cd99","#e97575","#e1a47c","#a9cd99");
 
 function setArray() {
 
@@ -33,13 +30,16 @@ function setArray() {
 			id:''+rows.fieldByName('id_ingrediente')+ '',
 			hasChild:true,
 			path:'ingredientes_specs.js',
-			color:'black',
-			backgroundColor:coloresArray[rows.fieldByName('id_grupo_alimenticio')],
+			color:'#1c191b',
+			left:'50',
+			backgroundImage:'../imagenes/botonsios_ingredientes/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 			backgroundSelectedColor:'orange',
 			font: {
-				fontSize:18,
-				fontFamily:'Meloriac'
-			}
+				fontFamily:'myriadpro-semibold',
+				fontSize: '20px'
+			},
+			height: 'auto',
+			width: 'auto'
 		});
 		rows.next();
 	};
@@ -51,7 +51,7 @@ function setArray() {
 // create table view
 
 var tableview = Ti.UI.createTableView({
-//backgroundImage:'../imagenes/f'+rows.fieldByName('id_grupo_alimenticio') +'.png',
+	//backgroundImage:'../imagenes/f'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 });
 
 tableview.addEventListener('click', function(e) {

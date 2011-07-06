@@ -34,6 +34,13 @@
 				Ti.API.info('idFondo =' + e.idFondo);
 				Ti.API.info('Url foto =' + e.imagen_url);
 
+				$('#apDiv8').css('font-family','meloriac-regular');
+				
+				$('#apDiv4').css('font-family','myriadpro-regular');
+				
+				$('#apDiv9').css('font-family','myriadpro-bold');
+				
+				
 				$('#apDiv2').css("background-image", "url('"+e.idFondo+"')");
 				$('#apDiv3').css("background-image", "url('"+e.imagen_url+"')");
 				$('#apDiv7').css("background-image", "url('"+e.idIconito+"')");
@@ -69,12 +76,13 @@
 		<title>ingrediente</title>
 		<style type="text/css">
 			#apDiv2 {
-	position:absolute;
-	left:0px;
-	top:0px;
-	width:320px;
-	height:738px;
-	z-index:1;				/*background-image:url(../imagenes/fondosHTML/4.png);*/
+				position:absolute;
+				left:0px;
+				top:0px;
+				width:320px;
+				height:738px;
+				z-index:1;
+				/*background-image:url(../imagenes/fondosHTML/4.png);*/
 			}
 			#apDiv3 {
 				position:absolute;
@@ -111,15 +119,13 @@
 				z-index:5;
 			}
 			.ingrediente {
-				font-weight: bold;
 				font-size: 33px;
 				color: #FFF;
-				font-family: "MS Serif", "New York", serif;
 				text-align: center;
-				text-transform:uppercase;
+				/*text-transform:uppercase;*/
 			}
 			.texto {
-				font-family: "Droid Serif";
+				font-family: "MyriadPro-Regular";
 				font-size: 16px;
 				color: #666;
 			}
@@ -130,7 +136,6 @@
 			}
 			.grupoAlimenticio {
 				color: #FFF;
-				font-family: "Myriad Pro";
 				font-style: italic;
 				font-size: 24px;
 				color: #000;
@@ -167,15 +172,14 @@
 				width:264px;
 				height:34px;
 				z-index:8;
-			}
-
+			}
 		</style>
 	</head>
 	<body>
 		<div id="apDiv2" >
 		</div>
 		<div id="apDiv3">
-		  <p>
+			<p>
 				<!-- 	<img src="../imagenes/ingredientes/555.png" width="140" height="195" alt="jgfh" /> -->
 			</p>
 		</div>

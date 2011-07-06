@@ -15,17 +15,26 @@ function setArray() {
 
 	var rows = db.execute('SELECT * FROM grupo_alimenticio');
 
-	Ti.API.info('rows:' + rows);
+	Ti.API.info('rows:' + rows.rowCount);
 	// create the array
 	var dataArray = [];
 
 	while (rows.isValidRow()) {
 		dataArray.push({
-			backgroundImage:'../imagenes/'+rows.fieldByName('id_grupo_alimenticio') +'.png'+ '',
+			title:''+rows.fieldByName('nombre')+ '',
 			id:''+rows.fieldByName('id_grupo_alimenticio')+ '',
-			titulo:''+rows.fieldByName('nombre')+ '',
 			hasChild:true,
-			path:'ingredientes.js'
+			path:'ingredientes.js',
+			color:'#1c191b',
+			left:'50',
+			backgroundImage:'../imagenes/botonsios_ingredientes/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
+			backgroundSelectedColor:'orange',
+			font: {
+				fontFamily:'myriadpro-semibold',
+				fontSize: '20px'
+			},
+			height: 'auto',
+			width: 'auto'
 		});
 		///dataArray.push({});
 		rows.next();
@@ -47,7 +56,7 @@ tableview.addEventListener('click', function(e) {
 			fullscreen:false,
 			url:e.rowData.path,
 			llave:e.rowData.id,
-			title:e.rowData.titulo
+			title:e.rowData.title
 		});
 
 		Ti.UI.currentTab.open(ahf);
