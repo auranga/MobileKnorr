@@ -20,18 +20,19 @@ function setArray() {
 
 	while (rows.isValidRow()) {
 		dataArray.push({
+			leftImage:'../imagenes/ingredientes_small/'+rows.fieldByName('id_ingrediente') + '.png',
 			title:'' + rows.fieldByName('nombre') + '',
 			id:''+rows.fieldByName('id_ingrediente')+ '',
 			idGrupo:''+rows.fieldByName('id_grupo_alimenticio')+ '',
 			hasChild:true,
 			path:'ingredientes_specs.js',
 			color:'#1c191b',
-			left:'50',
+			left:'10',
 			backgroundImage:'../imagenes/botonsios_ingredientes/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 			backgroundSelectedColor:'orange',
 			font: {
-				fontFamily:'myriadpro-semibold',
-				fontSize: '20px'
+				fontFamily:'melorias',
+			fontSize: '20px'
 			},
 			height: 'auto',
 			width: 'auto'
@@ -44,7 +45,7 @@ function setArray() {
 };
 
 var tableview = Ti.UI.createTableView({
-	//backgroundImage:'../imagenes/fondo.jpg'
+	backgroundImage:'../imagenes/fondo.jpg'
 });
 
 tableview.addEventListener('click', function(e) {

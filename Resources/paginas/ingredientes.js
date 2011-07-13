@@ -25,13 +25,23 @@ function setArray() {
 	var dataArray = [];
 
 	while (rows.isValidRow()) {
+
+		var imageLeft = Titanium.UI.createImageView({
+			url:'../imagenes/ingredientes_small/'+rows.fieldByName('id_ingrediente') + '.png',
+			left:4,
+			top:2,
+			width:35,
+			height:48
+		});
+
 		dataArray.push({
+			leftImage:'../imagenes/ingredientes_small/'+rows.fieldByName('id_ingrediente') + '.png',
 			title:'' + rows.fieldByName('nombre') + '',
 			id:''+rows.fieldByName('id_ingrediente')+ '',
 			hasChild:true,
 			path:'ingredientes_specs.js',
 			color:'#1c191b',
-			left:'50',
+			left:'10',
 			backgroundImage:'../imagenes/botonsios_ingredientes/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 			backgroundSelectedColor:'orange',
 			font: {
@@ -74,8 +84,8 @@ tableview.addEventListener('click', function(e) {
 			title:e.rowData.title
 		});
 		var webview = Titanium.UI.createWebView({
+			animated:true,
 			url:'ingredientes_specs.html'
-			//url:'webview-local.html'
 		});
 
 		webview.addEventListener('load', function() {

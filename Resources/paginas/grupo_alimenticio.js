@@ -7,7 +7,6 @@ var sound = Titanium.Media.createSound({
 sound.setLooping(true);
 sound.play();
 
-
 // set the data from the database to the array
 function setArray() {
 
@@ -21,12 +20,13 @@ function setArray() {
 
 	while (rows.isValidRow()) {
 		dataArray.push({
+			leftImage:'../imagenes/iconitos/'+rows.fieldByName('id_grupo_alimenticio') + '.png',
 			title:''+rows.fieldByName('nombre')+ '',
 			id:''+rows.fieldByName('id_grupo_alimenticio')+ '',
 			hasChild:true,
 			path:'ingredientes.js',
 			color:'#1c191b',
-			left:'50',
+			left:'10',
 			backgroundImage:'../imagenes/botonsios_ingredientes/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 			backgroundSelectedColor:'orange',
 			font: {
@@ -46,12 +46,12 @@ function setArray() {
 
 // create table view
 var tableview = Ti.UI.createTableView({
-	
+
 });
 
 tableview.addEventListener('click', function(e) {
 	if (e.rowData.path) {
-		
+
 		var ahf = Ti.UI.createWindow({
 			fullscreen:false,
 			url:e.rowData.path,
@@ -59,7 +59,9 @@ tableview.addEventListener('click', function(e) {
 			title:e.rowData.title
 		});
 
-		Ti.UI.currentTab.open(ahf);
+		Ti.UI.currentTab.open(ahf,{
+			animated:true
+		});
 
 	}
 });

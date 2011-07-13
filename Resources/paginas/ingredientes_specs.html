@@ -3,7 +3,15 @@
 	<head>
 		<script type="text/javascript" src="jquery-1.5.2.js"></script>
 		<script language= "javascript">
+
 			$(document).ready( function() {
+				
+				
+			function cancion() {
+				var song = new Audio("../audio/SD_KNORR_LOOP_003.wav");
+				song.loop = true;
+				document.body.appendChild(song);
+			};
 
 				document.getElementById("boton").ontouchstart = function() {
 
@@ -34,13 +42,16 @@
 				Ti.API.info('idFondo =' + e.idFondo);
 				Ti.API.info('Url foto =' + e.imagen_url);
 
-				$('#apDiv8').css('font-family','meloriac-regular');
-				
-				$('#apDiv4').css('font-family','myriadpro-regular');
-				
-				$('#apDiv9').css('font-family','myriadpro-bold');
-				
-				
+				//$('#apDiv8').css("font-family","melorias");
+				//$('#apDiv8').css("font-family:","melorias");
+				//$('#apDiv8').css("font-family","Meloriac");
+				//$('#apDiv8').css("font-family:","Meloriac");
+				$('#apDiv8').css("fontfamily","melorias");
+
+				$('#apDiv4').css("font-family","myriadpro-regular");
+
+				$('#apDiv9').css("font-family","myriadpro-bold");
+
 				$('#apDiv2').css("background-image", "url('"+e.idFondo+"')");
 				$('#apDiv3').css("background-image", "url('"+e.imagen_url+"')");
 				$('#apDiv7').css("background-image", "url('"+e.idIconito+"')");
@@ -82,12 +93,11 @@
 				width:320px;
 				height:738px;
 				z-index:1;
-				/*background-image:url(../imagenes/fondosHTML/4.png);*/
 			}
 			#apDiv3 {
 				position:absolute;
 				left:94px;
-				top:75px;
+				top:83px;
 				width:140px;
 				height:195px;
 				z-index:2;
@@ -119,13 +129,13 @@
 				z-index:5;
 			}
 			.ingrediente {
-				font-size: 33px;
+				font-size: 32px;
 				color: #FFF;
 				text-align: center;
-				/*text-transform:uppercase;*/
+				text-transform:uppercase;
+				 /*font-family: Meloriac;*/
 			}
 			.texto {
-				font-family: "MyriadPro-Regular";
 				font-size: 16px;
 				color: #666;
 			}
@@ -147,35 +157,36 @@
 				font-weight: bold;
 			}
 			#apDiv7 {
-				position:absolute;
-				left:2px;
-				top:8px;
-				width:67px;
-				height:50px;
-				z-index:6;
-				background-position: center center;
-				background-repeat:no-repeat;
+	position:absolute;
+	left:9px;
+	top:15px;
+	width:50px;
+	height:40px;
+	z-index:6;
+	background-position: center center;
+	background-repeat:no-repeat;
 			}
 			#apDiv8 {
 				position:absolute;
 				left:0px;
-				top:66px;
+				top:53px;
 				width:320px;
 				height:53px;
 				z-index:7;
 				text-align:center;
 			}
 			#apDiv9 {
-				position:absolute;
-				left:56px;
-				top:22px;
-				width:264px;
-				height:34px;
-				z-index:8;
-			}
+	position:absolute;
+	left:50px;
+	top:24px;
+	width:270px;
+	height:34px;
+	z-index:8;
+			}
+
 		</style>
 	</head>
-	<body>
+	<body onload="cancion()">
 		<div id="apDiv2" >
 		</div>
 		<div id="apDiv3">
@@ -276,18 +287,18 @@
 				</tr>
 			</table>
 		</div>
-		<div id="apDiv7">
-			<!--  <img src="../imagenes/iconitos/4.png" width="43" height="43" alt="ccs" />  -->
-		</div>
 		<div class="ingrediente" id="apDiv8">
 			<div id="nombre">
 			</div>
 			<div id="boton">
 			</div>
 		</div>
-		<div class="grupoAlimenticio" id="apDiv9">
-			<div id="nombreGrupo">
-			</div>
+		<div  id="apDiv9">
+		  <div class="grupoAlimenticio" id="nombreGrupo">
+		    </div>
 		</div>
-	</body>
+		<div id="apDiv7">
+		  <!--  <img src="../imagenes/iconitos/4.png" width="43" height="43" alt="ccs" />  -->
+    </div>
+    </body>
 </html>
