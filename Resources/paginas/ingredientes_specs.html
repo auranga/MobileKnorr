@@ -28,7 +28,6 @@
 						Ti.App.fireEvent('borrarFavoritos', {
 							idi:llave
 						});
-
 					}
 					Ti.API.info('esFavorito: '+esFavorito);
 				};
@@ -46,15 +45,21 @@
 				//$('#apDiv8').css("font-family:","melorias");
 				//$('#apDiv8').css("font-family","Meloriac");
 				//$('#apDiv8').css("font-family:","Meloriac");
-				$('#apDiv8').css("fontfamily","melorias");
+				//$('#apDiv8').css("fontfamily","melorias");
+				//$('#apDiv8').css("Font-Family","melorias");
+				
+				//$("#apDiv8").css( "font-family","melorias");
 
-				$('#apDiv4').css("font-family","myriadpro-regular");
 
-				$('#apDiv9').css("font-family","myriadpro-bold");
+				//$("#apDiv4").css("font-family","myriadpro-regular");
 
-				$('#apDiv2').css("background-image", "url('"+e.idFondo+"')");
-				$('#apDiv3').css("background-image", "url('"+e.imagen_url+"')");
-				$('#apDiv7').css("background-image", "url('"+e.idIconito+"')");
+				//$("#apDiv9").css("font-family","myriadpro-semibold");
+				
+
+				$("#apDiv2").css("background-image","url('"+e.idFondo+"')");
+				$("#apDiv3").css("background-image","url('"+e.imagen_url+"')");
+				$("#apDiv7").css("background-image","url('"+e.idIconito+"')");
+				
 				$("#nombreGrupo").text(e.nombreGrupo);
 				$("#informacion").text(e.informacion);
 				$("#nombre").text(e.nombre);
@@ -178,7 +183,7 @@
 			#apDiv9 {
 	position:absolute;
 	left:50px;
-	top:24px;
+	top:23px;
 	width:270px;
 	height:34px;
 	z-index:8;

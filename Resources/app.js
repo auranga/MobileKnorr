@@ -6,10 +6,13 @@ var tabGroup = Titanium.UI.createTabGroup();
 
 var win1 = Titanium.UI.createWindow({
 	title:'Home',
-	url:'paginas/grupo_alimenticio.js',
-	fullscreen:false,
-	height: 440,
-	tabBarHidden: false
+	height:440,
+	animated:true,
+	tabBarHidden:true,
+	backgroundColor: '#111',
+	//statusBarHidden:false
+    //fullscreen:false
+    url:'paginas/grupo_alimenticio.js',
 });
 
 var tab1 = Titanium.UI.createTab({
@@ -20,10 +23,12 @@ var tab1 = Titanium.UI.createTab({
 
 var win2 = Titanium.UI.createWindow({
 	title:'Favoritos',
-	url:'paginas/favoritos.js',
-	fullscreen:false,
 	height: 440,
-	tabBarHidden: false
+	animated:true,
+	tabBarHidden:true,
+    //fullscreen:false
+	//statusBarHidden:false
+	url:'paginas/favoritos.js',
 });
 
 var tab2 = Titanium.UI.createTab({
@@ -35,5 +40,4 @@ var tab2 = Titanium.UI.createTab({
 tabGroup.addTab(tab1);
 tabGroup.addTab(tab2);
 
-// open tab group
 tabGroup.open();

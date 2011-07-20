@@ -14,7 +14,6 @@ var llave = Ti.UI.currentWindow.llave;
 var title = Ti.UI.currentWindow.title;
 
 var rows = db.execute('SELECT * FROM ingrediente WHERE id_grupo_alimenticio="' + llave + '"');
-//var idfondo:rows.fieldByName('id_grupo_alimenticio'),
 
 function setArray() {
 
@@ -25,15 +24,6 @@ function setArray() {
 	var dataArray = [];
 
 	while (rows.isValidRow()) {
-
-		var imageLeft = Titanium.UI.createImageView({
-			url:'../imagenes/ingredientes_small/'+rows.fieldByName('id_ingrediente') + '.png',
-			left:4,
-			top:2,
-			width:35,
-			height:48
-		});
-
 		dataArray.push({
 			leftImage:'../imagenes/ingredientes_small/'+rows.fieldByName('id_ingrediente') + '.png',
 			title:'' + rows.fieldByName('nombre') + '',
@@ -42,7 +32,7 @@ function setArray() {
 			path:'ingredientes_specs.js',
 			color:'#1c191b',
 			left:'10',
-			backgroundImage:'../imagenes/botonsios_ingredientes/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
+			backgroundImage:'../imagenes/botonsios/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 			backgroundSelectedColor:'orange',
 			font: {
 				fontFamily:'myriadpro-semibold',
@@ -84,6 +74,7 @@ tableview.addEventListener('click', function(e) {
 			title:e.rowData.title
 		});
 		var webview = Titanium.UI.createWebView({
+			tabBarHidden:true,
 			animated:true,
 			url:'ingredientes_specs.html'
 		});
@@ -126,9 +117,7 @@ tableview.addEventListener('click', function(e) {
 			}
 		});
 		ahf.add(webview);
-		Titanium.UI.currentTab.open(ahf, {
-			animated:true
-		});
+		Titanium.UI.currentTab.open(ahf, {animated:true});
 	}
 });
 currentWin.add(tableview);

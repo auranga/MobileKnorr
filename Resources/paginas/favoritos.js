@@ -13,6 +13,8 @@ var llave = Ti.UI.currentWindow.llave;
 
 var rows = db.execute('SELECT DISTINCT ingrediente.nombre, ingrediente.id_ingrediente,ingrediente.id_grupo_alimenticio FROM ingrediente INNER JOIN ingredientes_favoritos ON  ingrediente.id_ingrediente = ingredientes_favoritos.id_ingrediente');
 
+Ti.API.info('rows:' + rows.rowCount);
+
 function setArray() {
 
 	// create the array
@@ -28,10 +30,11 @@ function setArray() {
 			path:'ingredientes_specs.js',
 			color:'#1c191b',
 			left:'10',
-			backgroundImage:'../imagenes/botonsios_ingredientes/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
+			backgroundImage:'../imagenes/botonsios/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 			backgroundSelectedColor:'orange',
 			font: {
-				fontFamily:'melorias',
+				//fontFamily:'melorias',
+			fontFamily:'myriadpro-semibold',
 			fontSize: '20px'
 			},
 			height: 'auto',

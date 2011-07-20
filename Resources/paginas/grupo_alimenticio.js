@@ -26,8 +26,8 @@ function setArray() {
 			hasChild:true,
 			path:'ingredientes.js',
 			color:'#1c191b',
-			left:'10',
-			backgroundImage:'../imagenes/botonsios_ingredientes/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
+			left:'2',
+			backgroundImage:'../imagenes/botonsios/'+rows.fieldByName('id_grupo_alimenticio') +'.png',
 			backgroundSelectedColor:'orange',
 			font: {
 				fontFamily:'myriadpro-semibold',
@@ -53,13 +53,15 @@ tableview.addEventListener('click', function(e) {
 	if (e.rowData.path) {
 
 		var ahf = Ti.UI.createWindow({
-			fullscreen:false,
+			//fullscreen:true,
+			//statusBarHidden:true,
+			//tabBarHidden:true,
 			url:e.rowData.path,
 			llave:e.rowData.id,
 			title:e.rowData.title
 		});
 
-		Ti.UI.currentTab.open(ahf,{
+		Ti.UI.currentTab.open(ahf, {
 			animated:true
 		});
 
