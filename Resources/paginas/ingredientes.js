@@ -1,6 +1,7 @@
-// create var for the currentWindow
+
 var currentWin = Ti.UI.currentWindow;
-// set the data from the database to the array
+
+
 var sound = Titanium.Media.createSound({
 	url:'../audio/SD_KNORR_LOOP_002.wav'
 });
@@ -15,12 +16,12 @@ var title = Ti.UI.currentWindow.title;
 
 var rows = db.execute('SELECT * FROM ingrediente WHERE id_grupo_alimenticio="' + llave + '"');
 
+
 function setArray() {
 
 	Ti.API.info('rows:' + rows.rowCount);
 
-	// create the array
-
+	
 	var dataArray = [];
 
 	while (rows.isValidRow()) {
@@ -44,15 +45,15 @@ function setArray() {
 		rows.next();
 	};
 
-	// set the array to the tableView
+	
 	tableview.setData(dataArray);
 };
 
-// create table view
 
 var tableview = Ti.UI.createTableView({
-	//backgroundImage:'../imagenes/f'+rows.fieldByName('id_grupo_alimenticio') +'.png',
+
 });
+
 
 tableview.addEventListener('click', function(e) {
 	if (e.rowData.path) {
@@ -61,6 +62,7 @@ tableview.addEventListener('click', function(e) {
 		var grupo = db.execute('SELECT * FROM grupo_alimenticio WHERE nombre = "' + title + '"');
 		var favorito = db.execute ('SELECT * FROM ingredientes_favoritos WHERE id_ingrediente = "' + e.rowData.id + '"');
 
+		
 		var agregado= false;
 		if(favorito.rowCount > 0) {
 			agregado = true;
@@ -73,8 +75,9 @@ tableview.addEventListener('click', function(e) {
 			fullscreen:false,
 			title:e.rowData.title
 		});
+		
+		
 		var webview = Titanium.UI.createWebView({
-			tabBarHidden:true,
 			animated:true,
 			url:'ingredientes_specs.html'
 		});
@@ -101,6 +104,8 @@ tableview.addEventListener('click', function(e) {
 				favorito:agregado
 			});
 		});
+		
+		
 		Ti.App.addEventListener('agregarFavoritos', function(e) {
 
 			if (!agregado) {
@@ -109,6 +114,8 @@ tableview.addEventListener('click', function(e) {
 				Ti.API.info('Datos Insertados llave idi: '+e.idi)
 			}
 		});
+		
+		
 		Ti.App.addEventListener('borrarFavoritos', function(e) {
 			if(agregado) {
 				agregado = false;

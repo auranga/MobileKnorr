@@ -5,13 +5,6 @@
 		<script language= "javascript">
 
 			$(document).ready( function() {
-				
-				
-			function cancion() {
-				var song = new Audio("../audio/SD_KNORR_LOOP_003.wav");
-				song.loop = true;
-				document.body.appendChild(song);
-			};
 
 				document.getElementById("boton").ontouchstart = function() {
 
@@ -41,26 +34,11 @@
 				Ti.API.info('idFondo =' + e.idFondo);
 				Ti.API.info('Url foto =' + e.imagen_url);
 
-				//$('#apDiv8').css("font-family","melorias");
-				//$('#apDiv8').css("font-family:","melorias");
-				//$('#apDiv8').css("font-family","Meloriac");
-				//$('#apDiv8').css("font-family:","Meloriac");
-				//$('#apDiv8').css("fontfamily","melorias");
-				//$('#apDiv8').css("Font-Family","melorias");
-				
-				//$("#apDiv8").css( "font-family","melorias");
-
-
-				//$("#apDiv4").css("font-family","myriadpro-regular");
-
-				//$("#apDiv9").css("font-family","myriadpro-semibold");
-				
-
 				$("#apDiv2").css("background-image","url('"+e.idFondo+"')");
 				$("#apDiv3").css("background-image","url('"+e.imagen_url+"')");
-				$("#apDiv7").css("background-image","url('"+e.idIconito+"')");
-				
-				$("#nombreGrupo").text(e.nombreGrupo);
+				$("#foto").empty().html('<img src='+e.idIconito+' align="ABSBOTTOM" />');
+				$(".nombreGrupo").text(e.nombreGrupo);
+
 				$("#informacion").text(e.informacion);
 				$("#nombre").text(e.nombre);
 				$("#energia").text(e.energia);
@@ -78,11 +56,11 @@
 				esFavorito =e.favorito;
 
 				if(esFavorito) {
-					//poner imagen de favorito
+
 					$("#boton").empty().html('<img src="../imagenes/favorito.png" />');
 
 				} else {
-					//poner imagen de NO favorito
+
 					$("#boton").empty().html('<img src="../imagenes/nofavorito.png" />');
 				}
 
@@ -90,114 +68,12 @@
 		</script>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>ingrediente</title>
-		<style type="text/css">
-			#apDiv2 {
-				position:absolute;
-				left:0px;
-				top:0px;
-				width:320px;
-				height:738px;
-				z-index:1;
-			}
-			#apDiv3 {
-				position:absolute;
-				left:94px;
-				top:83px;
-				width:140px;
-				height:195px;
-				z-index:2;
-				text-align: center;
-				background-repeat:no-repeat;
-			}
-			#apDiv4 {
-				position:absolute;
-				left:2px;
-				top:540px;
-				width:318px;
-				height:184px;
-				z-index:3;
-			}
-			#apDiv5 {
-				position:absolute;
-				left:0px;
-				top:273px;
-				width:320px;
-				height:171px;
-				z-index:4;
-			}
-			#apDiv6 {
-				position:absolute;
-				left:419px;
-				top:82px;
-				width:482px;
-				height:56px;
-				z-index:5;
-			}
-			.ingrediente {
-				font-size: 32px;
-				color: #FFF;
-				text-align: center;
-				text-transform:uppercase;
-				 /*font-family: Meloriac;*/
-			}
-			.texto {
-				font-size: 16px;
-				color: #666;
-			}
-			.datos {
-				font-size: 15px;
-				color: #FFF;
-				text-align: center;
-			}
-			.grupoAlimenticio {
-				color: #FFF;
-				font-style: italic;
-				font-size: 24px;
-				color: #000;
-				text-align:left;
-			}
-			.informacionbasica {
-				color: #000;
-				font-size: 19px;
-				font-weight: bold;
-			}
-			#apDiv7 {
-	position:absolute;
-	left:9px;
-	top:15px;
-	width:50px;
-	height:40px;
-	z-index:6;
-	background-position: center center;
-	background-repeat:no-repeat;
-			}
-			#apDiv8 {
-				position:absolute;
-				left:0px;
-				top:53px;
-				width:320px;
-				height:53px;
-				z-index:7;
-				text-align:center;
-			}
-			#apDiv9 {
-	position:absolute;
-	left:50px;
-	top:23px;
-	width:270px;
-	height:34px;
-	z-index:8;
-			}
-
-		</style>
+		<link href="estilo.css" rel="stylesheet" type="text/css" />
 	</head>
-	<body onload="cancion()">
-		<div id="apDiv2" >
+	<body>
+		<div id="apDiv2" >             
 		</div>
 		<div id="apDiv3">
-			<p>
-				<!-- 	<img src="../imagenes/ingredientes/555.png" width="140" height="195" alt="jgfh" /> -->
-			</p>
 		</div>
 		<div id="apDiv4">
 			<p class="informacionbasica">
@@ -298,12 +174,9 @@
 			<div id="boton">
 			</div>
 		</div>
-		<div  id="apDiv9">
-		  <div class="grupoAlimenticio" id="nombreGrupo">
-		    </div>
+		<div id="centro">
+			<span id="foto"></span>
+			<span class="nombreGrupo"></span>
 		</div>
-		<div id="apDiv7">
-		  <!--  <img src="../imagenes/iconitos/4.png" width="43" height="43" alt="ccs" />  -->
-    </div>
-    </body>
+	</body>
 </html>

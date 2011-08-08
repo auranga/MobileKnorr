@@ -1,7 +1,6 @@
-// this sets the background color of the master UIView (when there are no windows/tab groups on it)
 Titanium.UI.setBackgroundColor('#000');
 
-// create tab group
+
 var tabGroup = Titanium.UI.createTabGroup();
 
 var win1 = Titanium.UI.createWindow({
@@ -10,8 +9,6 @@ var win1 = Titanium.UI.createWindow({
 	animated:true,
 	tabBarHidden:true,
 	backgroundColor: '#111',
-	//statusBarHidden:false
-    //fullscreen:false
     url:'paginas/grupo_alimenticio.js',
 });
 
@@ -26,8 +23,6 @@ var win2 = Titanium.UI.createWindow({
 	height: 440,
 	animated:true,
 	tabBarHidden:true,
-    //fullscreen:false
-	//statusBarHidden:false
 	url:'paginas/favoritos.js',
 });
 

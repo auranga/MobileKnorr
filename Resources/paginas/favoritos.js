@@ -1,3 +1,4 @@
+
 var currentWin = Ti.UI.currentWindow;
 
 var sound = Titanium.Media.createSound({
@@ -17,7 +18,7 @@ Ti.API.info('rows:' + rows.rowCount);
 
 function setArray() {
 
-	// create the array
+	
 	var dataArray = [];
 
 	while (rows.isValidRow()) {
@@ -34,8 +35,8 @@ function setArray() {
 			backgroundSelectedColor:'orange',
 			font: {
 				//fontFamily:'melorias',
-			fontFamily:'myriadpro-semibold',
-			fontSize: '20px'
+				fontFamily:'myriadpro-semibold',
+				fontSize: '20px'
 			},
 			height: 'auto',
 			width: 'auto'
@@ -43,13 +44,14 @@ function setArray() {
 		rows.next();
 	};
 
-	// set the array to the tableView
+	
 	tableview.setData(dataArray);
 };
 
 var tableview = Ti.UI.createTableView({
 	backgroundImage:'../imagenes/fondo.jpg'
 });
+
 
 tableview.addEventListener('click', function(e) {
 	if (e.rowData.path) {
@@ -65,7 +67,6 @@ tableview.addEventListener('click', function(e) {
 		var agregado = true;
 
 		var ahf = Ti.UI.createWindow({
-			fullscreen:false,
 			title:e.rowData.title
 		});
 		var webview = Titanium.UI.createWebView({
@@ -94,27 +95,23 @@ tableview.addEventListener('click', function(e) {
 				favorito:agregado
 			});
 		});
-		//Ti.App.addEventListener('fromWebview',function(e){  Ti.API.info('from webview: '+e.msg);});
 
 		Ti.App.addEventListener('agregarFavoritos', function(e) {
 			var agregar = db.execute ('INSERT INTO ingredientes_favoritos (id_ingrediente) VALUES ("'+e.idi+'")');
-			agregar;
-			//Ti.API.info('Datos Insertados llave: '+e.llave)
 			Ti.API.info('Datos Insertados llave idi: '+e.idi)
 		});
 		Ti.App.addEventListener('borrarFavoritos', function(e) {
 			var borrar = db.execute ('DELETE FROM ingredientes_favoritos WHERE id_ingrediente = "'+e.idi+'"');
-			borrar;
-			//alert('Datos Borrados');
 			Ti.API.info('Datos borrados llave idi: '+e.idi)
 		});
+		
 		ahf.add(webview);
 		Titanium.UI.currentTab.open(ahf, {
 			animated:true
 		});
 	}
 });
-//tableview.add(the_img);
+
 currentWin.add(tableview);
 
 setArray();
